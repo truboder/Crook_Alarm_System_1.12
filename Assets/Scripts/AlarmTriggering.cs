@@ -8,27 +8,41 @@ public class AlarmTriggering : MonoBehaviour
     [SerializeField] private AudioSource _audio;
     [SerializeField] private float _volumeChangeValue = 0.01f;
 
-    public IEnumerator StartAlarm()
+    private Coroutine _coroutine;
+
+    public void StartAlarm()
     {
-        while (_audio.volume < 1)
-        {
-            _audio.volume += _volumeChangeValue;
+        var maxVolume = _audio.maxDistance;
 
-            yield return new WaitForFixedUpdate();
-
-            Debug.Log(_audio.volume);
-        }
+        StartChangeValue(maxVolume, _volumeChangeValue);
     }
 
-    public IEnumerator StopAlarm()
+    public void StopAlarm()
     {
-        while (_audio.volume > 0)
-        {
-            _audio.volume -= _volumeChangeValue;
+        var minVolume = _audio.minDistance;
 
-            yield return new WaitForFixedUpdate();
-        }
+        StartChangeValue(minVolume, -_volumeChangeValue);
     }
 
+    private void StartChangeValue(float requiredValue, float volumeChangeValue)
+    {
+        if (_coroutine != null)
+        {
+            StopCoroutine(_coroutine);
+        }
 
+        _coroutine = StartCoroutine(ChangeValue(requiredValue, volumeChangeValue));
+    }
+
+    private IEnumerator ChangeValue(float _requiredValue, float volumeChangeValue)
+    {
+        var waitingForFixed = new WaitForFixedUpdate();
+
+        while (_audio.volume != _requiredValue)
+        {
+            _audio.volume += volumeChangeValue;
+
+            yield return waitingForFixed;
+        }
+    }
 }

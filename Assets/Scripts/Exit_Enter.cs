@@ -8,12 +8,11 @@ public class Exit_Enter : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        IEnumerator enumerator = _alarmTriggering.StartAlarm();
-        StartCoroutine(enumerator);
+        _alarmTriggering.StartAlarm();
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        StartCoroutine(_alarmTriggering.StopAlarm());
+        _alarmTriggering.StopAlarm();
     }
 }
