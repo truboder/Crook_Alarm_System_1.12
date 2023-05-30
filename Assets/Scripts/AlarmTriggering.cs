@@ -10,14 +10,25 @@ public class AlarmTriggering : MonoBehaviour
 
     private Coroutine _coroutine;
 
-    public void StartAlarm()
+    public static UnityEvent EnterEvent;
+    public static UnityEvent ExitEvent;
+
+    private void Start()
+    {
+        EnterEvent = new UnityEvent();
+        EnterEvent.AddListener(StartAlarm);
+        ExitEvent = new UnityEvent();
+        ExitEvent.AddListener(StopAlarm);
+    }
+
+    private void StartAlarm()
     {
         var maxVolume = _audio.maxDistance;
 
         StartChangeValue(maxVolume, _volumeChangeValue);
     }
 
-    public void StopAlarm()
+    private void StopAlarm()
     {
         var minVolume = _audio.minDistance;
 

@@ -343,8 +343,8 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEditor.UI.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.ref.dll"
 "Assets/Scripts/AlarmTriggering.cs"
-"Assets/Scripts/Exit_Enter.cs"
 "Assets/Scripts/Movement.cs"
+"Assets/Scripts/MovementDetecting.cs"
 "Assets/Scripts/Player.cs"
 "Assets/Scripts/SpriteChanger.cs"
 -langversion:9.0

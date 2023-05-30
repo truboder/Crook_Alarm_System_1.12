@@ -59,7 +59,7 @@
     <Compile Include="Assets\Scripts\AlarmTriggering.cs" />
     <Compile Include="Assets\Scripts\SpriteChanger.cs" />
     <Compile Include="Assets\Scripts\Movement.cs" />
-    <Compile Include="Assets\Scripts\Exit_Enter.cs" />
+    <Compile Include="Assets\Scripts\MovementDetecting.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
   </ItemGroup>
   <ItemGroup>
