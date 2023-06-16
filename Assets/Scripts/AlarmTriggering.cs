@@ -10,15 +10,10 @@ public class AlarmTriggering : MonoBehaviour
 
     private Coroutine _coroutine;
 
-    public static UnityEvent EnterEvent;
-    public static UnityEvent ExitEvent;
-
     private void Start()
     {
-        EnterEvent = new UnityEvent();
-        EnterEvent.AddListener(StartAlarm);
-        ExitEvent = new UnityEvent();
-        ExitEvent.AddListener(StopAlarm);
+        MovementDetecting.AddEnteredListener(StartAlarm);
+        MovementDetecting.AddExitedListener(StopAlarm);
     }
 
     private void StartAlarm()
@@ -51,7 +46,7 @@ public class AlarmTriggering : MonoBehaviour
 
         while (_audio.volume != _requiredValue)
         {
-            _audio.volume += volumeChangeValue;
+            _audio.volume = Mathf.Clamp(_audio.volume + volumeChangeValue, _audio.minDistance, _audio.maxDistance);
 
             yield return waitingForFixed;
         }
